@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operative-report-web
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operative-report-web
+  template:
+    metadata:
+      labels:
+        app: operative-report-web
+    spec:
+      containers:
+      - name: k8stest
+        image: operativereportweb:0.2
+        env:
+        - name: REACT_APP_API_URL
+          value: http://192.168.1.190:30189/code
+        ports:
+        - containerPort: 3000
+      imagePullSecrets:
+        - name: regcred

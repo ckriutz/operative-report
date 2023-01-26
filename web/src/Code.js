@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
 
 function Code() {
-    const [data, setData] = useState([])
+    const [data, setData] = useState("hello-world")
 
     useEffect(() => async() => {
-        setData("hello-world");
-        const response = await fetch('http://localhost:5189/code', {method:'GET'});
+        const apiurl = process.env.REACT_APP_API_URL;
+        console.log(apiurl);
+        const response = await fetch(apiurl, {method:'GET'});
         const body = await response.text();
-        console.log(body);
         await setData(body);
     }, []);
 
