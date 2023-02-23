@@ -30,6 +30,7 @@ function Code() {
             <h1>{convertEmoji(data.Emoji)}</h1>
             <p>{data.Adjective}-{data.Person}</p>
             <p style={{ fontSize: 14 }}>{data.MachineName}</p>
+            <p>Updated Change</p>
         </div>
  
     );
