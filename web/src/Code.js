@@ -4,7 +4,7 @@ function Code() {
     const [data, setData] = useState([])
 
     useEffect(() => async() => {
-        const apiurl = process.env.REACT_APP_API_URL === null ? "http://localhost:5189" : process.env.REACT_APP_API_URL;
+        const apiurl = process.env.REACT_APP_API_URL === null ? "http://localhost:5189/code" : process.env.REACT_APP_API_URL;
         console.log(apiurl);
         const response = await fetch(apiurl, {method:'GET'});
         const body = await response.json();
@@ -30,7 +30,6 @@ function Code() {
             <h1>{convertEmoji(data.Emoji)}</h1>
             <p>{data.Adjective}-{data.Person}</p>
             <p style={{ fontSize: 14 }}>{data.MachineName}</p>
-            <p>Updated Change</p>
         </div>
  
     );
