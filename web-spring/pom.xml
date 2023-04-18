@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.operativereport</groupId>
 	<artifactId>web</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>web</name>
 	<description>The Web for Operative Report but in Java</description>
 	<properties>

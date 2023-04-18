@@ -16,8 +16,13 @@ import com.operativereport.web.OperativeObject;
 public class WebController {
     @RequestMapping(value = "/")
     public String index(@RequestParam(name="id", required=false, defaultValue="0") String name, Model model) { 
+        // Retrieve storage account from connection-string.
+        String operativeApiurl = System.getenv("apiURL");
+        if(operativeApiurl == null) {
+            operativeApiurl = "http://localhost:5000/code";
+        }
+
         RestTemplate rt = new RestTemplate();
-        String operativeApiurl = "http://localhost:5000/code";
         OperativeObject obj = new OperativeObject();
 
         ResponseEntity<String> response = rt.getForEntity(operativeApiurl, String.class);
