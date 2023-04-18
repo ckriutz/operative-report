@@ -8,6 +8,14 @@
       <title>Operative Report</title>
    </head>
    <body>
-    <h1>Operative Report</h1>
+      <div class="App">
+         <header class="App-header">
+            <div>
+               <h1 th:text="${emoji}"></h1>
+               <span th:text="${adjective}"></span>-<span th:text="${person}"></span>
+               <p th:text="${machineName}" style="font-size: 14;"></p>
+           </div>
+         </header>
+      </div>
     </body>
 </html>
