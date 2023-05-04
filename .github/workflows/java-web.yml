@@ -53,10 +53,6 @@ jobs:
         working-directory: ./web-spring
         run: mvn clean install
 
-      - name: List Files for Troubleshooting
-        working-directory: ./web-spring
-        run: ls ${{ github.workspace }}
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
