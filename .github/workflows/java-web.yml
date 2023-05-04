@@ -54,13 +54,14 @@ jobs:
         run: mvn clean install
 
       - name: List Files for Troubleshooting
+        working-directory: ./web-spring
         run: ls ${{ github.workspace }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/web-spring/target/*.jar'
 
   deploy:
     permissions:
