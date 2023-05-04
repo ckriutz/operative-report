@@ -50,11 +50,11 @@ jobs:
           cache: 'maven'
 
       - name: Build with Maven
+        working-directory: ./web-spring
         run: mvn clean install
 
-        # Do we just need to package things?
-      - name: Build with Maven
-        run: mvn package
+      - name: List Files for Troubleshooting
+        run: ls ${{ github.workspace }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
