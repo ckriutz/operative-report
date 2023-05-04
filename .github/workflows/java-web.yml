@@ -52,11 +52,15 @@ jobs:
       - name: Build with Maven
         run: mvn clean install
 
+        # Do we just need to package things?
+      - name: Build with Maven
+        run: mvn package
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/code/target/*.jar'
+          path: '${{ github.workspace }}/target/*.jar'
 
   deploy:
     permissions:
