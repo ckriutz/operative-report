@@ -38,4 +38,4 @@ jobs:
           with:
             context: "{{defaultContext}}:Api"
             push: true
-            tags: ${{ steps.meta.outputs.tags }}
+            tags: ckriutz/operative-report-api:latest
