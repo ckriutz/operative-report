@@ -44,5 +44,5 @@ jobs:
           with:
             context: "{{defaultContext}}:Api"
             push: true
-            tags: ${{ steps.meta.outputs.tags }}
+            tags: ${{ github.repository }}/${{ github.actor }}/operative-report-api:latest
             labels: ${{ steps.meta.outputs.tags }}
