@@ -39,10 +39,15 @@ jobs:
           with:
               images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
+        - name: Log Tags
+          run: echo ${{ steps.meta.outputs.tags }}
+
         - name: Build and push Docker image
           uses: docker/build-push-action@v4.1.1
           with:
             context: "{{defaultContext}}:Api"
             push: true
-            tags: operative-report-api:latest
+            tags: |
+                ${{ steps.meta.outputs.tags }}
+                ${{ github.repository }}/ckriutz/operative-report/operative-report-api:${{ github.sha }}
             labels: ${{ steps.meta.outputs.tags }}
