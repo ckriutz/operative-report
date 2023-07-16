@@ -1,4 +1,4 @@
-name: Build and deploy the dotnet core API in a Docker image, and push to github registry.
+name: Build and deploy the react web front end in a Docker image, and push to github registry.
 
 env:
     REGISTRY: ghcr.io
@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: ./Api
+                working-directory: ./web-react
         permissions:
             contents: read
             packages: write
@@ -42,10 +42,10 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v4.1.1
           with:
-            context: "{{defaultContext}}:Api"
+            context: "{{defaultContext}}:web-react"
             platforms: linux/amd64,linux/arm64
             push: true
             tags: |
-                ghcr.io/ckriutz/operative-report:api-latest
-                ghcr.io/ckriutz/operative-report:api.${{ github.sha }}
+                ghcr.io/ckriutz/operative-report:web-react-latest
+                ghcr.io/ckriutz/operative-report:web-react.${{ github.sha }}
             labels: ${{ steps.meta.outputs.tags }}
