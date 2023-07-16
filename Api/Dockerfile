@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/aspnet:7.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0.5-alpine3.17 AS base
 WORKDIR /app
 EXPOSE 5189
 
@@ -9,7 +9,7 @@ ENV ASPNETCORE_URLS=http://+:5189
 RUN adduser -u 5678 --disabled-password --gecos "" appuser && chown -R appuser /app
 USER appuser
 
-FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/nightly/sdk:8.0-preview AS build
 WORKDIR /src
 COPY ["Api.csproj", "./"]
 RUN dotnet restore "Api.csproj"
