@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: operative-report-api
-  namespace: default
+  namespace: operative-report
 spec:
   replicas: 1
   selector:
@@ -15,8 +15,6 @@ spec:
     spec:
       containers:
       - name: k8stest
-        image: operativereportapi:0.1
+        image: ghcr.io/ckriutz/operative-report:api-latest
         ports:
         - containerPort: 5189
-      imagePullSecrets:
-        - name: regcred
