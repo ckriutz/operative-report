@@ -14,7 +14,7 @@ spec:
         app: operative-report-api
     spec:
       containers:
-      - name: k8stest
+      - name: operative-report-api
         image: ghcr.io/ckriutz/operative-report:api-latest
         ports:
         - containerPort: 5189
