@@ -3,13 +3,15 @@ import { useState, useEffect } from 'react'
 function Code() {
     const [data, setData] = useState([])
 
-    useEffect(() => async() => {
-        const apiurl = process.env.REACT_APP_API_URL === null ? "http://localhost:5189/code" : process.env.REACT_APP_API_URL;
-        console.log(apiurl);
-        const response = await fetch(apiurl, {method:'GET', mode: 'cors'});
-        const body = await response.json();
-        await setData(body);
+    const apiurl = process.env.REACT_APP_API_URL === null ? "http://localhost:5189/code" : process.env.REACT_APP_API_URL;
+
+    console.log(apiurl);
+    useEffect(() => {
+        fetch(apiurl)
+          .then((response) => response.json())
+          .then((actualData) => setData(actualData));
     }, []);
+
     
     function convertEmoji(e)
     {
