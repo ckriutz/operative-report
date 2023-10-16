@@ -1,6 +1,7 @@
 using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("no-cors-policy", policy =>{
@@ -8,7 +9,7 @@ builder.Services.AddCors(options =>
     });
 });
 var app = builder.Build();
-app.UseCors();
+app.UseCors("no-cors-policy");
 
 string adjectiveFileName = "Adjectives.json";
 string adjectiveJsonString = File.ReadAllText(adjectiveFileName);
