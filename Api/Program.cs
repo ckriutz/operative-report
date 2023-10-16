@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("no-cors-policy", policy =>{
-        policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000", "https://operative-report.system-k.io", "*");
     });
 });
 var app = builder.Build();
@@ -22,7 +22,7 @@ List<string> people = JsonSerializer.Deserialize<List<string>>(peopleJsonString)
 // Until we figure out how to serailize smoji's, this will have to do.
 List<string> emojis = new List<string>() {"rocket","fire","pineapple","party","ghost","robot","skull","puzzle"};
 
-app.MapGet("/", () => $"Everything is up and running on {Environment.MachineName}");
+app.MapGet("/", () => $"Everything is up and running on {Environment.MachineName}. Version 0.2");
 
 app.MapGet("/code", () =>
 {
