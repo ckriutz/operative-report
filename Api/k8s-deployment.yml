@@ -16,5 +16,6 @@ spec:
       containers:
       - name: operative-report-api
         image: ghcr.io/ckriutz/operative-report:api-latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5189

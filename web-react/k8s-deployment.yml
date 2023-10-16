@@ -16,6 +16,7 @@ spec:
       containers:
       - name: operative-report-web
         image: ghcr.io/ckriutz/operative-report:web-react-latest
+        imagePullPolicy: Always
         env:
         - name: REACT_APP_API_URL
           valueFrom:
