@@ -20,8 +20,8 @@ spec:
         env:
         - name: REACT_APP_API_URL
           valueFrom:
-            secretKeyRef:
-              name: api-url
+            configMapKeyRef:
+              name: operative-report-config
               key: api-url
         ports:
         - containerPort: 3000
