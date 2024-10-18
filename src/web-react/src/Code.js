@@ -5,9 +5,13 @@ function Code() {
 
     const apiurl = process.env.REACT_APP_API_URL === null ? "http://localhost:5189/code" : process.env.REACT_APP_API_URL;
 
-    console.log(apiurl);
+    console.log(apiurl)
+    const headers = {
+        "Access-Control-Allow-Origin": "*",
+        "Content-Type": "application/json",
+    }
     useEffect(() => {
-        fetch(apiurl)
+        fetch(apiurl, { headers: headers })
           .then((response) => response.json())
           .then((actualData) => setData(actualData));
     }, []);

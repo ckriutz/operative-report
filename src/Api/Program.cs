@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("no-cors-policy", policy =>{
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000", "https://operative-report.system-k.io", "*");
+        policy.AllowAnyHeader().AllowAnyMethod().AllpwAnyOrigin();
     });
 });
 var app = builder.Build();

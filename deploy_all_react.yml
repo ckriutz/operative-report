@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: operative-report
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: operative-report-config
+  namespace: operative-report
+data:
+  api-url: http://192.168.0.1:5189/code
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operative-report-api-service
+  namespace: operative-report
+  labels:
+    app: operative-report-api
+    kubernetes.io/service-name: operative-report-api-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 5189
+    protocol: TCP
+    name: http
+  selector:
+    app: operative-report-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: operative-report-web-service
+  namespace: operative-report
+  labels:
+    app: operative-report-web
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+    protocol: TCP
+    name: http
+  selector:
+    app: operative-report-web
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operative-report-api
+  namespace: operative-report
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operative-report-api
+  template:
+    metadata:
+      labels:
+        app: operative-report-api
+    spec:
+      containers:
+      - name: operative-report-api
+        image: ghcr.io/ckriutz/operative-report:api-latest
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "2"
+          requests:
+            memory: "512Mi"
+            cpu: "1"
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5189
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: operative-report-web
+  namespace: operative-report
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: operative-report-web
+  template:
+    metadata:
+      labels:
+        app: operative-report-web
+    spec:
+      containers:
+      - name: operative-report-web
+        image: ghcr.io/ckriutz/operative-report:web-react-latest
+        resources:
+          limits:
+            memory: "1Gi"
+            cpu: "2"
+          requests:
+            memory: "512Mi"
+            cpu: "1"
+        imagePullPolicy: Always
+        env:
+        - name: REACT_APP_API_URL
+          valueFrom:
+            configMapKeyRef:
+              name: operative-report-config
+              key: api-url
+        ports:
+        - containerPort: 3000
