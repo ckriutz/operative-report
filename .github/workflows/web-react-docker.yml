@@ -1,4 +1,4 @@
-name: Build and deploy the react web front end in a Docker image, and push to github registry.
+name: React Web Build & Deploy Docker Image
 
 env:
     REGISTRY: ghcr.io
@@ -7,6 +7,8 @@ env:
 on:
     push:
         branches: [ "main" ]
+        paths:
+            - "src/web-react/**"
 
 jobs:
     build-and-push-image:
