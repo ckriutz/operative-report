@@ -13,7 +13,7 @@ jobs:
         runs-on: ubuntu-latest
         defaults:
             run:
-                working-directory: ./api/web-react
+                working-directory: ./src/web-react
         permissions:
             contents: read
             packages: write
@@ -42,7 +42,7 @@ jobs:
         - name: Build and push Docker image
           uses: docker/build-push-action@v4.1.1
           with:
-            context: "{{defaultContext}}:api/web-react"
+            context: "{{defaultContext}}:src/web-react"
             platforms: linux/amd64,linux/arm64
             push: true
             tags: |
